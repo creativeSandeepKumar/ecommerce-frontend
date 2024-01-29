@@ -1,11 +1,18 @@
+"use client"
+import Navbar from "@/components/Layout/Navbar/Navbar";
 import { Button } from "@/components/ui/button";
+import Slides from "@/utils/Slides";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-        <h2>Hello brother</h2>
-        <Button>Hii Chikni</Button>
+    <main className="relative">
+      <div className="space-y-3">
+      <Slides/>
+      </div>
+     
     </main>
   );
 }
