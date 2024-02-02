@@ -53,3 +53,222 @@ export const DesktopSlides = [
       itemindex: 6,
     },
   ];
+
+  export const SidebarContent = [
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/dropdown-TWS_100x.png?v=1684827062",
+      text: "True Wireless Earbuds"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Nirvana-ION-Black-_-1_-1.1_100x.png?v=1699269477",
+      text: "Personalized products"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Neckbands_06214c1a-5e30-48ea-ac14-4a6bff679f48_100x.png?v=1684828287",
+      text: "Neckbands"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/smartwatches_100x.png?v=1684827668",
+      text: "Smart Watches"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Rectangle271_100x.png?v=1701414051",
+      text: "Wireless Headphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/box-5_100x.png?v=1684827751",
+      text: "Wireless Speakers"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/wiredheadphones_100x.webp?v=1705400196",
+      text: "Wired Headphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Wiredearphones_100x.webp?v=1705399424",
+      text: "Wired Earphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Collections_5baef8f1-a67a-40a5-a537-4258c6caae6a_100x.png?v=1684827849",
+      text: "Soundbars"
+    },
+  ];
+
+ export const ExpandMoreContent = [
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/dropdown-TWS_100x.png?v=1684827062",
+      text: "True Wireless Earbuds"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Nirvana-ION-Black-_-1_-1.1_100x.png?v=1699269477",
+      text: "Personalized products"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Neckbands_06214c1a-5e30-48ea-ac14-4a6bff679f48_100x.png?v=1684828287",
+      text: "Neckbands"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/smartwatches_100x.png?v=1684827668",
+      text: "Smart Watches"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Rectangle271_100x.png?v=1701414051",
+      text: "Wireless Headphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/box-5_100x.png?v=1684827751",
+      text: "Wireless Speakers"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/wiredheadphones_100x.webp?v=1705400196",
+      text: "Wired Headphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Wiredearphones_100x.webp?v=1705399424",
+      text: "Wired Earphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Collections_5baef8f1-a67a-40a5-a537-4258c6caae6a_100x.png?v=1684827849",
+      text: "Soundbars"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/dropdown-TWS_100x.png?v=1684827062",
+      text: "True Wireless Earbuds"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Nirvana-ION-Black-_-1_-1.1_100x.png?v=1699269477",
+      text: "Personalized products"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Neckbands_06214c1a-5e30-48ea-ac14-4a6bff679f48_100x.png?v=1684828287",
+      text: "Neckbands"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/smartwatches_100x.png?v=1684827668",
+      text: "Smart Watches"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Rectangle271_100x.png?v=1701414051",
+      text: "Wireless Headphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/box-5_100x.png?v=1684827751",
+      text: "Wireless Speakers"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/wiredheadphones_100x.webp?v=1705400196",
+      text: "Wired Headphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Wiredearphones_100x.webp?v=1705399424",
+      text: "Wired Earphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Collections_5baef8f1-a67a-40a5-a537-4258c6caae6a_100x.png?v=1684827849",
+      text: "Soundbars"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/dropdown-TWS_100x.png?v=1684827062",
+      text: "True Wireless Earbuds"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Nirvana-ION-Black-_-1_-1.1_100x.png?v=1699269477",
+      text: "Personalized products"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Neckbands_06214c1a-5e30-48ea-ac14-4a6bff679f48_100x.png?v=1684828287",
+      text: "Neckbands"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/smartwatches_100x.png?v=1684827668",
+      text: "Smart Watches"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Rectangle271_100x.png?v=1701414051",
+      text: "Wireless Headphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/box-5_100x.png?v=1684827751",
+      text: "Wireless Speakers"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/wiredheadphones_100x.webp?v=1705400196",
+      text: "Wired Headphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Wiredearphones_100x.webp?v=1705399424",
+      text: "Wired Earphones"
+    },
+    {
+      images: "https://www.boat-lifestyle.com/cdn/shop/collections/Collections_5baef8f1-a67a-40a5-a537-4258c6caae6a_100x.png?v=1684827849",
+      text: "Soundbars"
+    },
+  ];
+
+  export const MoreNavContent = [
+    {
+      name: "Daily Sales",
+      url: "#",
+    },
+    {
+      name: "Do what floats your boat",
+      url: "#",
+    },
+    {
+      name: "Blogs",
+      url: "#",
+    },
+    {
+      name: "Earb 100 rupee",
+      url: "#",
+    },
+    {
+      name: "Career",
+      url: "#",
+    },
+    {
+      name: "Social Responsibilty",
+      url: "#",
+    },
+    {
+      name: "Store Locator",
+      url: "#",
+    },
+  ];
+
+ export const NavItems = [
+    {
+      name: "boAt Personalization",
+      url: "#",
+    },
+    {
+      name: "gift With boAt",
+      url: "#",
+    },
+    {
+      name: "Corporate Orders",
+      url: "#",
+    },
+    {
+      name: "Account",
+      url: "#",
+    },
+    {
+      name: "Track Your Order",
+      url: "#",
+    },
+  ];
+
+export const desktopNavItems = [
+  {
+    name: "boAt Personalization",
+    url: "#",
+  },
+  {
+    name: "gift With boAt",
+    url: "#",
+  },
+  {
+    name: "Corporate Orders",
+    url: "#",
+  },
+  ]
