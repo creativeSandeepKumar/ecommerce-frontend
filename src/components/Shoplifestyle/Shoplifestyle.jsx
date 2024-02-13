@@ -44,7 +44,7 @@ const ShopByLifestyleItems = [
 
 const ShopByLifestyle = () => {
   return (
-    <Container>
+    <div>
         <Heading item1={"Shop By"} item2={"Lifestyle"} />
     <Carousel className="w-full">
       <CarouselContent className="w-full">
@@ -61,7 +61,7 @@ const ShopByLifestyle = () => {
         ))}
       </CarouselContent>
     </Carousel>
-    </Container>
+    </div>
   );
 };
 

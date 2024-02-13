@@ -41,7 +41,7 @@ const BestSellerItems = [
 
 const Bestseller = () => {
   return (
-    <Container>
+    <div>
         <Heading item1={"Explore"} item2={"Bestsellers"} />
     <Carousel className="w-full">
       <CarouselContent className="w-full">
@@ -59,7 +59,7 @@ const Bestseller = () => {
         ))}
       </CarouselContent>
     </Carousel>
-    </Container>
+    </div>
   );
 };
 

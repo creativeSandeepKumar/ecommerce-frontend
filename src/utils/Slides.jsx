@@ -2,83 +2,15 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { PhoneSlides, DesktopSlides } from "@/constants";
 import { FcNext, FcPrevious } from "react-icons/fc";
+import useSlideControllers from "@/hooks/useSlideControllers";
+import Slidescontainer from "./slides/Slidescontainer";
 
 const Slides = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const touchStartX = useRef(null);
-  const touchEndX = useRef(null);
-
-  // go to next slide
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === PhoneSlides.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  // go to previous slides
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? PhoneSlides.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleTouchStart = (event) => {
-    touchStartX.current = event.touches[0].clientX;
-  };
-
-  const handleTouchMove = (event) => {
-    touchEndX.current = event.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    if (touchStartX.current - touchEndX.current > 50) {
-      // Swipe left, go to next slide
-      nextSlide();
-    } else if (touchStartX.current - touchEndX.current < -50) {
-      // Swipe right, go to previous slide
-      prevSlide();
-    }
-    // Reset touch coordinates
-    touchStartX.current = null;
-    touchEndX.current = null;
-  };
-
-  const handleKeyDown = useCallback(
-    (event) => {
-      console.log("check event key", event.key);
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        prevSlide();
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault();
-        nextSlide();
-      }
-    },
-    [nextSlide, prevSlide]
-  );
-
-  // automatic sliding every 2 seconds
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // jump to specific slide
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-  };
+  const {currentIndex, goToSlide, handleKeyDown, handleTouchEnd, handleTouchMove, handleTouchStart, nextSlide, prevSlide} = useSlideControllers(PhoneSlides);
 
   return (
-    <div
-      className="space-y-3 relative md:flex items-center"
-      onKeyDownCapture={handleKeyDown}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      tabIndex={0}
-    >
-      <aside className="slide-items w-full">
-        <div className="relative">
+   
+    <Slidescontainer handleKeyDown={handleKeyDown} handleTouchStart={handleTouchStart} handleTouchMove={handleTouchMove} handleTouchEnd={handleTouchEnd} >
           <div className="overflow-hidden">
             <div
               className="hidden md:flex transition-transform duration-500 transform"
@@ -156,9 +88,7 @@ const Slides = () => {
               ></button>
             ))}
           </div>
-        </div>
-      </aside>
-    </div>
+    </Slidescontainer>
   );
 };
 

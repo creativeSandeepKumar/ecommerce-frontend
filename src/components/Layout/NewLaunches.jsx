@@ -59,7 +59,7 @@ const NewLaunchesItems = [
 
 const NewLaunches = () => {
   return (
-    <Container>
+    <div>
         <Heading item1={"New"} item2={"Launches"} />
     <Carousel className="w-full">
       <CarouselContent className="w-full">
@@ -76,7 +76,7 @@ const NewLaunches = () => {
         ))}
       </CarouselContent>
     </Carousel>
-    </Container>
+    </div>
   );
 };
 

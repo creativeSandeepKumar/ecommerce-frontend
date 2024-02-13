@@ -9,26 +9,54 @@ import {
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import DesktopNav from "./DesktopNav";
+import { useRouter, usePathname } from "next/navigation";
+import Cartside from "./Cart/Cartside";
 
 const Navbar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   let whilteBoatIcon =
     "https://cdn.shopify.com/s/files/1/0057/8938/4802/files/boAt_logo_small_71d998b6-159b-46d2-8b6f-a91055697fdc.png?v=1693460400";
   let BoatIcon =
     "https://www.boat-lifestyle.com/cdn/shop/files/boAt_logo_small_3067da8c-a83b-46dd-b28b-6ef1e16ccd17_small.svg?v=1693549434";
 
+  // const [openSidebar, setOpenSidebar] = useState(false);
+  const [currenturl, setCurrenturl] = useState();
   const [showNavbar, setShowNavbar] = useState(false);
-  const [openSidebar, setOpenSidebar] = useState(false);
+  const [openSidebar, setOpenSidebar] = useState({
+    isopensidebar: false,
+    isopencart: false,
+  });
 
   const handleSidebar = () => {
-    console.log("this is cliked");
-    setOpenSidebar(!openSidebar);
+   setOpenSidebar({
+    isopensidebar: !openSidebar.isopensidebar
+   })
   };
 
+  const handleCart = () => {
+   setOpenSidebar({
+    isopencart: !openSidebar.isopencart
+   })
+  };
+
+
+
   const handleCloseSidebar = () => {
-    if (openSidebar) {
-      setOpenSidebar(false);
+    if (openSidebar.isopensidebar || openSidebar.isopencart) {
+      setOpenSidebar({
+        isopencart: false
+      });
     }
   };
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setCurrenturl(true);
+    } else {
+      setCurrenturl(false);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,10 +80,11 @@ const Navbar = () => {
       <div className="py-2 text-center" onClick={handleCloseSidebar}>
         Scrollable content
       </div>
-      <ul></ul>
       <nav
         className={`${
-          showNavbar ? "fixed top-0 left-0 border-b-2 py-1 border-gray-600 bg-white" : "absolute"
+          showNavbar || currenturl
+            ? "fixed top-0 left-0 border-b-2 py-1 border-gray-600 bg-white"
+            : "absolute"
         } w-full z-10`}
       >
         <div
@@ -64,7 +93,7 @@ const Navbar = () => {
         >
           <ul className="flex items-center gap-2">
             <li className="lg:hidden" onClick={(e) => e.stopPropagation()}>
-              {openSidebar ? (
+              {openSidebar.isopensidebar ? (
                 <CrossIcon
                   onClick={handleSidebar}
                   className={`text-xl ${
@@ -75,14 +104,15 @@ const Navbar = () => {
                 <BarIcon
                   onClick={handleSidebar}
                   className={`text-xl ${
-                    showNavbar ? "text-black" : "text-white"
+                    showNavbar || currenturl ? "text-black" : "text-white"
                   }`}
                 />
               )}
             </li>
             <li>
               <img
-                src={showNavbar ? BoatIcon : whilteBoatIcon}
+                onClick={() => router.push("/")}
+                src={showNavbar || currenturl ? BoatIcon : whilteBoatIcon}
                 alt="whiteBoatIcon"
                 className="w-full h-full max-h-6"
               />
@@ -95,21 +125,21 @@ const Navbar = () => {
             <li>
               <SearchIcon
                 className={`text-2xl ${
-                  showNavbar ? "text-black" : "text-white"
+                  showNavbar || currenturl ? "text-black" : "text-white"
                 }`}
               />
             </li>
             <li>
               <UserIcon
                 className={`text-2xl ${
-                  showNavbar ? "text-black" : "text-white"
+                  showNavbar || currenturl ? "text-black" : "text-white"
                 }`}
               />
             </li>
-            <li>
-              <BagIcon
+            <li onClick={(e) => e.stopPropagation()}>
+              <BagIcon  onClick={handleCart}
                 className={`text-2xl ${
-                  showNavbar ? "text-black" : "text-white"
+                  showNavbar || currenturl ? "text-black" : "text-white"
                 }`}
               />
             </li>
@@ -117,14 +147,26 @@ const Navbar = () => {
         </div>
         <div
           className={` ${
-            openSidebar
-              ? "fixed w-full z-10"
+            openSidebar.isopensidebar
+              ? "fixed  w-full z-10"
               : "fixed w-0 -left-20 transition-all duration-500"
           }`}
         >
           <Sidebar
             handleCloseSideNav={handleSidebar}
-            openSideNav={openSidebar}
+            openSideNav={openSidebar.isopensidebar}
+          />
+        </div>
+        <div
+          className={` ${
+            openSidebar.isopencart
+              ? "fixed right-0 top-0 w-full z-10"
+              : "fixed  top-0 w-0 -right-20 transition-all duration-500"
+          }`}
+        >
+          <Cartside
+            handleCloseSideNav={handleCart}
+            openSideNav={openSidebar.isopencart}
           />
         </div>
       </nav>

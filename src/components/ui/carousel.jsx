@@ -173,7 +173,9 @@ const CarouselPrevious = React.forwardRef(({ className, variant = "outline", siz
 CarouselPrevious.displayName = "CarouselPrevious"
 
 const CarouselNext = React.forwardRef(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const { orientation, scrollNext, canScrollNext } = useCarousel();
+  console.log(canScrollNext);
+
 
   return (
     (<Button

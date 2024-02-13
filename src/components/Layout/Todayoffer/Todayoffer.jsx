@@ -66,7 +66,7 @@ const TodaysofferItems = [
 
 const Todayoffer = () => {
   return (
-    <Container>
+    <div>
         <Heading item1={"Today's"} item2={"Offer"} />
     <Carousel className="w-full">
       <CarouselContent className="w-full">
@@ -83,7 +83,7 @@ const Todayoffer = () => {
         ))}
       </CarouselContent>
     </Carousel>
-    </Container>
+    </div>
   );
 };
 

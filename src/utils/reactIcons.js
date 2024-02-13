@@ -12,5 +12,15 @@ import { MdCurrencyRupee } from "react-icons/md";
 import { BsPatchCheckFill } from "react-icons/bs";
 import { FaPencil } from "react-icons/fa6";
 import { GiRoundStar } from "react-icons/gi";
+import { PiShoppingCartSimple } from "react-icons/pi";
+import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
+import { MdRadioButtonUnchecked } from "react-icons/md";
+import { GoCheckCircle } from "react-icons/go";
+import { FaRegEdit } from "react-icons/fa";
+import { HiOutlinePlusCircle } from "react-icons/hi2";
+import { TbAdjustmentsHorizontal } from "react-icons/tb";
+import { TbArrowsSort } from "react-icons/tb";
 
-export { FaBars as BarIcon, IoIosSearch as SearchIcon, FaRegUser as UserIcon, HiOutlineShoppingBag as BagIcon, ImCross as CrossIcon, FaPlus as PlusIcon, FaMinus as MinusIcon, MdArrowForwardIos as ForwardArrow, MdArrowCircleDown as CircleDownArrow,  IoArrowForwardCircleOutline as CircleRightArrow, MdCurrencyRupee as RupeeIocn, GiRoundStar as StarIcon, BsPatchCheckFill as CheckIconPatch, FaPencil as PencilIcon  }
+
+export { FaBars as BarIcon, IoIosSearch as SearchIcon, FaRegUser as UserIcon, HiOutlineShoppingBag as BagIcon, ImCross as CrossIcon, FaPlus as PlusIcon, FaMinus as MinusIcon, MdArrowForwardIos as ForwardArrow, MdArrowCircleDown as CircleDownArrow,  IoArrowForwardCircleOutline as CircleRightArrow, MdCurrencyRupee as RupeeIocn, GiRoundStar as StarIcon, BsPatchCheckFill as CheckIconPatch, FaPencil as PencilIcon, PiShoppingCartSimple as ShoppingCartIcon, IoIosArrowUp as ArrowAup, IoIosArrowDown as ArrowDown, MdRadioButtonUnchecked as UncheckedIcon, GoCheckCircle as CheckIcon, FaRegEdit as EditIcon, HiOutlinePlusCircle as PlusCircleIcon, TbAdjustmentsHorizontal as FilterIcon, TbArrowsSort as SortIcon  }

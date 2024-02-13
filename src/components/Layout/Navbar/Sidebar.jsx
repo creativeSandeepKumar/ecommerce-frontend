@@ -14,8 +14,8 @@ const Sidebar = ({ openSideNav, handleCloseSideNav }) => {
       <aside
         className={`bg-white px-4 h-[94vh] overflow-y-auto ${
           openSideNav
-            ? "w-[80%] transition-all duration-1000"
-            : "w-0 transition-all duration-700"
+            ? "w-[80%] transition-all duration-500"
+            : "w-0 transition-all duration-500"
         } max-w-xs min-h-full border-t-2 border-gray-400 z-20 pt-5 pb-10`}
         style={{ scrollbarWidth: "thin" }}
         onClick={(e) => e.stopPropagation()}

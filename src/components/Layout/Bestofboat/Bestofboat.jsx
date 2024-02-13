@@ -31,7 +31,7 @@ const Bestofboat = () => {
   }, [activeItem]);
 
   return (
-    <Container>
+    <div>
       <Heading item1={"Best Of"} item2={"boAt"} />
       <BestofboatNavigation
         activeItem={activeItem}
@@ -55,7 +55,7 @@ const Bestofboat = () => {
           ))}
         </CarouselContent>
       </Carousel>
-    </Container>
+    </div>
   );
 };
 

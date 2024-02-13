@@ -17,7 +17,7 @@ const Categories = () => {
     const categoryItems = [...SidebarContent, ...ExpandMoreContent];
 
   return (
-    <Container>
+    <div>
         <Heading item1={"Shop by"} item2={"Categories"} />
     <Carousel className="w-full py-2">
     <CarouselContent className="w-full flex">
@@ -51,7 +51,7 @@ const Categories = () => {
 </CarouselContent>
 
     </Carousel>
-    </Container>
+    </div>
   );
 };
 
