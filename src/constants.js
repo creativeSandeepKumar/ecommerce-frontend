@@ -1,4 +1,112 @@
+// utilities/imageUtils.js (or any suitable location)
+export const compressAndConvertToBase64 = (imageData) => {
+  return new Promise((resolve) => {
+    const maxWidth = 800; // Set your desired maximum width
+    const maxHeight = 600; // Set your desired maximum height
+    const maxSizeKB = 200; // Set your desired maximum file size in KB
 
+    const img = new Image();
+    img.src = imageData;
+
+    img.onload = () => {
+      let width = img.width;
+      let height = img.height;
+
+      if (width > maxWidth || height > maxHeight) {
+        const aspectRatio = width / height;
+        if (width > maxWidth) {
+          width = maxWidth;
+          height = width / aspectRatio;
+        }
+        if (height > maxHeight) {
+          height = maxHeight;
+          width = height * aspectRatio;
+        }
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Convert the compressed image to a Blob
+      canvas.toBlob(
+        (blob) => {
+          if (blob.size <= maxSizeKB * 1024) {
+            // If the compressed image is smaller than or equal to 80KB,
+            // convert it to base64 and resolve the Promise.
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+              const compressedImageBase64 = reader.result;
+              resolve(compressedImageBase64);
+            };
+          } else {
+            console.warn(
+              `The image could not be compressed to ${maxSizeKB}KB. Current size: ${blob.size / 1024}KB`
+            );
+            resolve(imageData); // Return the original image data if compression fails.
+          }
+        },
+        'image/jpeg',
+        0.7 // Adjust the quality as needed
+      );
+    };
+  });
+};
+
+export const compressImage = (imageData) => {
+  return new Promise((resolve) => {
+    const maxWidth = 800; // Set your desired maximum width
+    const maxHeight = 600; // Set your desired maximum height
+    const maxSizeKB = 200; // Set your desired maximum file size in KB
+
+    const img = new Image();
+    img.src = imageData;
+
+    img.onload = () => {
+      let width = img.width;
+      let height = img.height;
+
+      if (width > maxWidth || height > maxHeight) {
+        const aspectRatio = width / height;
+        if (width > maxWidth) {
+          width = maxWidth;
+          height = width / aspectRatio;
+        }
+        if (height > maxHeight) {
+          height = maxHeight;
+          width = height * aspectRatio;
+        }
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Convert the compressed image to a Blob
+      canvas.toBlob(
+        (blob) => {
+          if (blob.size <= maxSizeKB * 1024) {
+            // If the compressed image is smaller than or equal to maxSizeKB,
+            // resolve the Promise with the compressed image Blob.
+            resolve(blob);
+          } else {
+            console.warn(
+              `The image could not be compressed to ${maxSizeKB}KB. Current size: ${blob.size / 1024}KB`
+            );
+            resolve(blob); // Return the original image data if compression fails.
+          }
+        },
+        'image/jpeg',
+        0.7 // Adjust the quality as needed
+      );
+    };
+  });
+};
 
 export const PhoneSlides = [
     {
