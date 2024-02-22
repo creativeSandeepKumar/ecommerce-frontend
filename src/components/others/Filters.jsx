@@ -193,7 +193,7 @@ const Filters = ({ isfilteropen, closefilter }) => {
     >
       <section
         onClick={(e) => e.stopPropagation()}
-        className="absolute max-w-sm bottom-0 w-[100%] sm:w-[80%] bg-stone-100 rounded-tr-md h-[90%] py-3"
+        className="absolute max-w-sm bottom-0 w-[100%] sm:w-[80%] py-6 bg-stone-100 rounded-tr-md h-[90%]"
       >
         <section className="flex justify-between">
         <div className="flex items-center px-4">

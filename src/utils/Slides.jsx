@@ -9,7 +9,6 @@ const Slides = () => {
   const {currentIndex, goToSlide, handleKeyDown, handleTouchEnd, handleTouchMove, handleTouchStart, nextSlide, prevSlide} = useSlideControllers(PhoneSlides);
 
   return (
-   
     <Slidescontainer handleKeyDown={handleKeyDown} handleTouchStart={handleTouchStart} handleTouchMove={handleTouchMove} handleTouchEnd={handleTouchEnd} >
           <div className="overflow-hidden">
             <div
