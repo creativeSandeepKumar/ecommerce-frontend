@@ -4,6 +4,11 @@ import axios from 'axios';
 
 const Page = () => {
   const [responseData, setResponseData] = useState(null);
+  const [subvarinats, setSubvarinats] = useState({
+    name: "Geen",
+    colorCode: "#23dd443",
+    images: []
+  })
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -21,6 +26,7 @@ const Page = () => {
     mainImage: null,
     subImages: [],
     activeOffers: [],
+    subImageVariants: [],
   });
 
   const handleChange = (e) => {
@@ -83,9 +89,11 @@ const Page = () => {
 
     // Collect sub image URLs
     const subImageUrls = await Promise.all(subImagePromises);
-    productData.subImages = subImageUrls;
+    const subvariantData = {
+      ...subvarinats, images: subImageUrls
+    }
+    productData.subImageVariants = subvariantData;
 
-    console.log("Here check final productData", productData)
     // Create product
     const productResponse = await axios.post('http://localhost:8080/api/v1/products', productData, {
       withCredentials: true,
