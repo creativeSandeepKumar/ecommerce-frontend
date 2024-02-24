@@ -51,6 +51,7 @@ const Page = () => {
     }));
   };
 
+
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     const mainImageData = new FormData();
@@ -66,7 +67,6 @@ const Page = () => {
 
     // Collect main image URL
     const mainImageUrl = mainImageResponse.data?.data;
-    console.log("check mainImageResponse", mainImageResponse.data?.data)
 
     // Prepare data for creating product
     const productData = {
@@ -89,13 +89,14 @@ const Page = () => {
 
     // Collect sub image URLs
     const subImageUrls = await Promise.all(subImagePromises);
+    // const subImageUrls = subImagePromises;
     const subvariantData = {
       ...subvarinats, images: subImageUrls
     }
     productData.subImageVariants = subvariantData;
 
     // Create product
-    const productResponse = await axios.post('http://localhost:8080/api/v1/products', productData, {
+    const productResponse = await axios.patch('http://localhost:8080/api/v1/products/65d80674fd30aae5f1bf9ffb', productData, {
       withCredentials: true,
     });
 
