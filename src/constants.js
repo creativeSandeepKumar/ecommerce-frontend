@@ -369,7 +369,7 @@ export const DesktopSlides = [
 export const desktopNavItems = [
   {
     name: "boAt Personalization",
-    url: "#",
+    url: "/dashboard",
   },
   {
     name: "gift With boAt",

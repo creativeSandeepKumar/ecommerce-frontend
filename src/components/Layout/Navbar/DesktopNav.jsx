@@ -80,7 +80,7 @@ const DesktopNav = () => {
         </NavigationMenuItem>
        {desktopNavItems.map((items, index) => (
              <NavigationMenuItem key={index} >
-             <Link href="/" legacyBehavior passHref>
+             <Link href={items.url} legacyBehavior passHref>
                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 <div className="text-base">
                  {items.name}
