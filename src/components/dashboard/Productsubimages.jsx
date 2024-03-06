@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import Input from '../Elements/Input';
 
 const Productsubimages = ({formData, setFormData}) => {
@@ -41,7 +41,7 @@ const Productsubimages = ({formData, setFormData}) => {
       
         const reader = new FileReader();
         reader.onload = () => {
-          const subvariant = subvariantsList.find((subv) => subv.id === index);
+          const subvariant = previewSubImages.find((subv) => subv.id === index);
           subvariant.images = [...subvariant.images, reader.result];
       
           setPreviewSubImages((prevImages) =>
@@ -52,12 +52,14 @@ const Productsubimages = ({formData, setFormData}) => {
             )
           );
         };
-      
         reader.readAsDataURL(files);
-      
+
         setSubvariantsList((prevList) =>
-          prevList.map((subvariant, i) => (i === index ? { ...subvariant, images: [...subvariant.images, ...event.target.files] } : subvariant))
+          prevList.map((subvariant, i) => (subvariant.id === index ? { ...subvariant, images: [...subvariant.images, ...event.target.files] } : subvariant))
         );
+
+     
+
       };
 
 
@@ -80,12 +82,13 @@ const Productsubimages = ({formData, setFormData}) => {
           />
         );
 
-        // useEffect(() => {
-        //     setFormData((prevData) => ({
-        //         ...prevData, 
-        //     }))
+        useEffect(() => {
+            setFormData((prevData) => ({
+                ...prevData, 
+                subvariants: subvariantsList,
+            }))
           
-        // }, [subvariantsList])
+        }, [subvariantsList])
         
 
   return (

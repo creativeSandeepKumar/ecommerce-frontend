@@ -28,6 +28,7 @@ const Page = () => {
     subImages: [],
     activeOffers: "",
     subImageVariants: [],
+    subvariants: [],
   });
 
   const [mainImagePreview, setMainImagePreview] = useState("");
@@ -80,10 +81,19 @@ const Page = () => {
       mainImage: mainImageUrl,
     };
 
-    // Upload sub images
-    const subImagePromises = formData.subImages.map(async (subImage) => {
+  // Upload sub-images individually for each subvariant
+  const subImagePromises = formData.subvariants.map(async (subvariant) => {
+    const subvariantData = {
+      name: subvariant.name,
+      colorCode: subvariant.colorCode,
+      images: [], // Array to store image URLs
+    };
+
+    const imagePromises = subvariant.images.map(async (subImage) => {
+      // Create a separate FormData for each sub-image
       const subImageData = new FormData();
       subImageData.append("subImages", subImage);
+
       const subImageResponse = await axios.post(
         "http://localhost:8080/api/v1/products/sub-images",
         subImageData,
@@ -94,18 +104,18 @@ const Page = () => {
           withCredentials: true,
         }
       );
-      return subImageResponse.data?.data;
+
+      return subImageResponse.data?.data; // Assuming response contains image URL
     });
 
-    // Collect sub image URLs
-    const subImageUrls = await Promise.all(subImagePromises);
-    // const subImageUrls = subImagePromises;
-    const subvariantData = {
-      ...subvarinats,
-      images: subImageUrls,
-    };
-    productData.subImageVariants = subvariantData;
+    const imageUrls = await Promise.all(imagePromises);
+    subvariantData.images = imageUrls;
+    return subvariantData;
+  });
 
+    const subvariantData = await Promise.all(subImagePromises);
+  productData.subvariants = subvariantData;
+  
     // Create product
     const productResponse = await axios.post(
       "http://localhost:8080/api/v1/products",
@@ -117,6 +127,7 @@ const Page = () => {
 
     setResponseData(productResponse.data);
   };
+
 
   const formItems = [
     {
