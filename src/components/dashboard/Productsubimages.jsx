@@ -57,9 +57,6 @@ const Productsubimages = ({formData, setFormData}) => {
         setSubvariantsList((prevList) =>
           prevList.map((subvariant, i) => (subvariant.id === index ? { ...subvariant, images: [...subvariant.images, ...event.target.files] } : subvariant))
         );
-
-     
-
       };
 
 
@@ -95,9 +92,9 @@ const Productsubimages = ({formData, setFormData}) => {
     <div>
         <h4 className='text-lg font-semibold'>Create Sub Image Variants</h4>
                {subvariantsList.map((subvariant, index) => (
-        <section key={subvariant.id} className='border-gray-600 border-[1px] rounded-md p-2 '>
+        <section key={subvariant.id} className='border-gray-600 border-[1px] rounded-md p-2 my-2'>
             {subvariantsList.find((sv) => sv.id === subvariant.id) && (
-                <div>
+                <div className='space-y-2'>
           <div className='flex gap-2'>
             <fieldset className='border-gray-500 border-[1px] rounded-md px-3'>
               <legend className='px-[3px]'>Color Name</legend>
@@ -136,7 +133,7 @@ const Productsubimages = ({formData, setFormData}) => {
           {index < subvariantsList.length - 1 && (
             <button
               type='button'
-              className='text-sm font-semibold bg-gray-300 px-3 p-1 rounded-md mt-2'
+              className='text-sm text-white font-semibold bg-red-400 hover:bg-red-800 px-3 p-1 rounded-md mt-2'
               onClick={() => handleRemoveSubvariant(subvariant.id)}
             >
               Remove Subvariant
@@ -146,7 +143,8 @@ const Productsubimages = ({formData, setFormData}) => {
             )}
         </section>
       ))}
-      <button type="button" className="bg-gray-300 px-4 py-1 rounded-md" onClick={handleAddSubvariant}>
+       <button type="button" className="bg-blue-400 text-white hover:bg-blue-600 px-4 py-1 my-2 rounded-md"
+       onClick={() =>handleAddSubvariant()}>
         Add More Subvariants
       </button>
     </div>

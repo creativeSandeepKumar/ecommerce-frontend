@@ -380,3 +380,80 @@ export const desktopNavItems = [
     url: "#",
   },
   ]
+
+  const RequestTypeEnum = {
+    GET: "GET",
+    POST: "POST",
+    PATCH: "PATCH",
+    DELETE: "DELETE",
+  };
+  
+  const AvailableRequestType = Object.values(RequestTypeEnum);
+  
+  const UserRolesEnum = {
+    USER: "USER",
+    TEACHER: "TEACHER",
+    STUDENT: "STUDENT",
+    ADMIN: "ADMIN",
+    BLOGGER: "BLOGGER",
+  };
+  
+  const AvailableUserRoles = Object.values(UserRolesEnum);
+  
+  const ValidateUserRoles = (userrole) => {
+    const isValidUserRole = {
+      User: false,
+      Teacher: false,
+      Student: false,
+      Admin: false,
+      Blogger: false,
+    };
+  
+    if (AvailableUserRoles.includes(userrole)) {
+      switch (userrole) {
+        case UserRolesEnum.USER:
+          isValidUserRole.User = true;
+          break;
+        case UserRolesEnum.STUDENT:
+          isValidUserRole.Student = true;
+          break;
+        case UserRolesEnum.TEACHER:
+          isValidUserRole.Teacher = true;
+          break;
+        case UserRolesEnum.BLOGGER:
+          isValidUserRole.Blogger = true;
+          break;
+        case UserRolesEnum.ADMIN:
+          isValidUserRole.Admin = true;
+          break;
+      }
+    }
+  
+    return {
+      validUser: isValidUserRole.User,
+      validStudent: isValidUserRole.Student,
+      validTeacher: isValidUserRole.Teacher,
+      validBlogger: isValidUserRole.Blogger,
+      validAdmin: isValidUserRole.Admin,
+    };
+  };
+  
+  const BlogStatusEnum = {
+    All: "ALL",
+    DRAFT: "DRAFT",
+    UNDERREVIEW: "UNDERREVIEW",
+    PUBLISHED: "PUBLISHED",
+  };
+  
+  const AvailableBlogStatus = Object.values(BlogStatusEnum);
+  
+  export {
+    RequestTypeEnum,
+    AvailableRequestType,
+    UserRolesEnum,
+    AvailableUserRoles,
+    ValidateUserRoles,
+    BlogStatusEnum,
+    AvailableBlogStatus,
+  };
+  

@@ -1,20 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container } from "@/components";
 import Input from "@/components/Elements/Input";
 import Select from "@/components/Elements/Select";
 import Createproductspecification from "@/components/dashboard/Createproductspecification";
 import Productsubimages from "@/components/dashboard/Productsubimages";
+import useApiRequest from "@/hooks/useApiRequest";
+import { RequestTypeEnum } from "@/constants";
+import { constructFullUrl } from "@/utils/helper";
 
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL
 const Page = () => {
   const [responseData, setResponseData] = useState(null);
-  const [subvarinats, setSubvarinats] = useState({
-    name: "Geen",
-    colorCode: "#23dd443",
-    images: [],
-  });
-
+   // Adjust as needed
+  const { apiData, handleApiRequest } = useApiRequest( "/categories" , RequestTypeEnum.GET);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -53,7 +53,6 @@ const Page = () => {
     }));
     reader.readAsDataURL(file);
   };
-
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
@@ -115,7 +114,7 @@ const Page = () => {
 
     const subvariantData = await Promise.all(subImagePromises);
   productData.subvariants = subvariantData;
-  
+
     // Create product
     const productResponse = await axios.post(
       "http://localhost:8080/api/v1/products",
@@ -162,6 +161,11 @@ const Page = () => {
     },
   ];
 
+  useEffect(() => {
+   handleApiRequest();
+  }, []);
+
+
   return (
     <Container>
       <div className="">
@@ -192,7 +196,8 @@ const Page = () => {
                   value={formData.category}
                   handleChange={handleChange}
                   className="w-full px-2"
-                  options={["Watches", "Woofer", "657be09fada690d387d51f7d"]}
+                  options={apiData?.categories.map((category) => category.name) || ["Watches", "Woofer", "657be09fada690d387d51f7d"]}
+                  idoptions={apiData?.categories.map((category) => category._id)}
                   multiple={false}
                 />
               </div>
@@ -232,8 +237,8 @@ const Page = () => {
               Create Product
             </button>
           </section>
-          <section className="w-full md:h-[100vh] overflow-y-auto md:sticky md:top-20 border-[1px] border-gray-500 p-2 rounded-md grid justify-center items-center">
-            <aside className="py-2">
+          <section className="w-full border-[1px] border-gray-500 p-2 rounded-md grid justify-center items-center">
+            <aside className="border-[1px] border-gray-600 rounded-md p-2">
               <img
                 src={
                   !formData.mainImage

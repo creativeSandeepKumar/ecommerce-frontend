@@ -6,6 +6,7 @@ import StoreProvider from "@/store/StoreProvoider";
 
 const inter = Inter({ subsets: ["latin"] });
 
+
 export const metadata = {
   title: "Too-Commerce",
   description: "Your shopping mall",
