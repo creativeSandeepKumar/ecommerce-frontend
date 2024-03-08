@@ -1,20 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Container } from "@/components";
 import Input from "@/components/Elements/Input";
-import Select from "@/components/Elements/Select";
 import Createproductspecification from "@/components/dashboard/Createproductspecification";
 import Productsubimages from "@/components/dashboard/Productsubimages";
-import useApiRequest from "@/hooks/useApiRequest";
-import { RequestTypeEnum } from "@/constants";
-import { constructFullUrl } from "@/utils/helper";
+import Category from "@/components/category/Category";
+import Activeoffers from "@/components/activeoffers/Activeoffers";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL
 const Page = () => {
   const [responseData, setResponseData] = useState(null);
-   // Adjust as needed
-  const { apiData, handleApiRequest } = useApiRequest( "/categories" , RequestTypeEnum.GET);
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -161,10 +158,6 @@ const Page = () => {
     },
   ];
 
-  useEffect(() => {
-   handleApiRequest();
-  }, []);
-
 
   return (
     <Container>
@@ -187,50 +180,11 @@ const Page = () => {
                 />
               </aside>
             ))}
-            <aside className="flex flex-wrap esm:flex-nowrap w-full py-1 items-end gap-2">
-              <div className="w-full">
-                <Select
-                  label={"Select Cateory"}
-                  defaultText="Select Category"
-                  name="category"
-                  value={formData.category}
-                  handleChange={handleChange}
-                  className="w-full px-2"
-                  options={apiData?.categories.map((category) => category.name) || ["Watches", "Woofer", "657be09fada690d387d51f7d"]}
-                  idoptions={apiData?.categories.map((category) => category._id)}
-                  multiple={false}
-                />
-              </div>
-              <div className="w-full">
-                <button
-                  type="button"
-                  className="px-4 w-full bg-blue-500 hover:bg-blue-900 text-white rounded-md h-8"
-                >
-                  Create Category
-                </button>
-              </div>
+            <aside className="w-full">
+            <Category formData={formData} handleChange={handleChange} />
             </aside>
             <aside className="flex flex-wrap esm:flex-nowrap w-full py-1 items-end gap-2">
-              <div className="w-full">
-                <Select
-                  label={"Select Active Offers(Optional)"}
-                  defaultText="Select Active Offers"
-                  name="activeOffers"
-                  value={formData.activeOffers}
-                  handleChange={handleChange}
-                  className="w-full px-2"
-                  options={["30% Off", "50% Off", "657be09fada690d387d51f7d"]}
-                  multiple={false}
-                />
-              </div>
-              <div className="w-full">
-                <button
-                  type="button"
-                  className="px-4 w-full bg-blue-500 hover:bg-blue-900 text-white rounded-md h-8"
-                >
-                  Create Active Offers
-                </button>
-              </div>
+            <Activeoffers formData={formData} handleChange={handleChange} />
             </aside>
             <Createproductspecification formData={formData} setFormData={setFormData} />
             <button className="px-4 py-1 w-full bg-blue-800 hover:bg-blue-900 text-white rounded-md mt-3">

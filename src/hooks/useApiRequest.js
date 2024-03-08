@@ -9,11 +9,10 @@ const useApiRequest = (requesturl, requesttype="GET", requestdata) => {
     const [apiData, setApiData] = useState(null);
 
     const handleApiRequest = () => {
-        
         if(!AvailableRequestType.includes(requesttype) ) {
             return  reactToast("error", `Invalid request type ${requesttype}`); 
         }
-
+        
         switch (requesttype) {
             case RequestTypeEnum.GET:
                 handleGetRequest(setLoading, setApiResponse, requesturl);
