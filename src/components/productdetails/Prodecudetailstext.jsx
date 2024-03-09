@@ -5,7 +5,7 @@ import ActiveOffers from "./ActiveOffers";
 import Rewardspayments from "./Rewardspayments";
 import { Button } from "@/components/ui/button";
 
-const Prodecudetailstext = ({ productdetails }) => {
+const Prodecudetailstext = ({ productdetail, productdetails }) => {
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
 
   const colors = (color) => {
@@ -18,30 +18,41 @@ const Prodecudetailstext = ({ productdetails }) => {
     setSelectedColorIndex(index);
   };
 
+  let colornames = productdetail && productdetail?.subImageVariants.map((subvariants) => {
+    return {
+      name: subvariants.name,
+      colorcode: subvariants.colorCode
+    }
+  });
+
+  console.log(colornames);
+
+  // console.log(productdetail?.subImageVariants.map((subvariants) => subvariants.name));
+
   return (
     <div className="space-y-2 relative">
       <div className="flex gap-2 items-center">
         <span className="flex items-center text-xl font-extrabold">
           <RupeeIocn />
-          {productdetails.currentPrice}
+          {productdetail?.sellPrice || productdetails.currentPrice}
         </span>
         <span className="flex items-center text-lg font-medium line-through text-gray-500">
           <RupeeIocn />
-          {productdetails.MRP}
+          {productdetail?.maxPrice || productdetails.MRP}
         </span>
         <span className="text-lg font-semibold text-cyan-500">
-          {productdetails.offPercentage}% off
+          {productdetail?.discountPercentage || productdetails.offPercentage}% off
         </span>
       </div>
       <section className="space-y-2">
         <div className="flex gap-2 py-1">
           <p className="text-base font-semibold">Choose your color:</p>
-          <p>{productdetails.colors[selectedColorIndex]}</p>
+          <p>{colornames && colornames[selectedColorIndex].name || productdetails.colors[selectedColorIndex]}</p>
         </div>
         <div>
           <aside className="flex gap-3">
-            {Array.isArray(productdetails.colors) &&
-              productdetails.colors.map((item, index) => (
+            {Array.isArray(colornames) &&
+              colornames.map((item, index) => (
                 <section key={index}>
                   <div
                     className="rounded-full border-2"
@@ -57,7 +68,7 @@ const Prodecudetailstext = ({ productdetails }) => {
                         margin: "2px",
                         padding: "2px",
                         borderRadius: "50%",
-                        backgroundColor: colors(item),
+                        backgroundColor: item?.colorcode,
                       }}
                     >
                       {" "}

@@ -158,7 +158,6 @@ const Page = () => {
     },
   ];
 
-
   return (
     <Container>
       <div className="">
@@ -191,8 +190,8 @@ const Page = () => {
               Create Product
             </button>
           </section>
-          <section className="w-full border-[1px] border-gray-500 p-2 rounded-md grid justify-center items-center">
-            <aside className="border-[1px] border-gray-600 rounded-md p-2">
+          <section className="w-full border-[1px] border-gray-500 p-2 rounded-md grid justify-center">
+            <aside className="border-[1px] rounded-md p-2">
               <img
                 src={
                   !formData.mainImage
@@ -211,9 +210,9 @@ const Page = () => {
                   className="border-none px-0 pt-1"
                 />
               </div>
-            </aside>
             <aside className="py-2">
              <Productsubimages formData={formData} setFormData={setFormData}  />
+            </aside>
             </aside>
           </section>
         </form>

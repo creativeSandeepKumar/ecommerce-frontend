@@ -3,8 +3,11 @@ import { Container, Detailsimg, Prodecudetailstext } from '@/components'
 import Credibility from '@/components/Layout/Credibility';
 import Productspecification from '@/components/productdetails/Productspecification';
 import Reviews from '@/components/productdetails/Reviews';
-import React from 'react';
-
+import { RequestTypeEnum } from '@/constants';
+import useApiRequest from '@/hooks/useApiRequest';
+import axios from 'axios';
+import React, { useEffect } from 'react';
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL
 const prodcutDetails = {
   images: [
     "https://www.boat-lifestyle.com/cdn/shop/products/main_black_fa1c6ec3-93b7-443e-ae82-d5eeb34258f8_600x.png?v=1641206192",
@@ -26,22 +29,30 @@ const prodcutDetails = {
 }
 
 const Page = ({params}) => {
+  const { apiData, apiResponse, handlSubmitRequest, loading } = useApiRequest("/products/65ecbeb3d71098b1a95c85a1", RequestTypeEnum.GET);
+
+  useEffect(() => {
+   handlSubmitRequest();
+  }, []);
+
+  console.log(apiData?.subImageVariants[0]?.images.map((images) => images.url));
+  
 
   return (
     <Container>
       <div className='space-y-3'>
     <section className='font-[Roboto] space-y-2 md:grid grid-cols-4 grid-flow-row gap-3'>
       <div className='space-y-2 col-span-2 row-span-2 order-2 '>
-        <h2 className='text-2xl font-bold'>{prodcutDetails.name}</h2>
-        <p className='font-[Raleway] text-sm'>{prodcutDetails.description}</p>
+        <h2 className='text-2xl font-bold'>{apiData?.name || prodcutDetails.name}</h2>
+        <p className='font-[Raleway] text-sm'>{apiData?.description || prodcutDetails.description}</p>
       </div>
       <aside className='col-span-2 order-1 row-span-4'>
         <div className="sticky top-24">
-          <Detailsimg productimages={prodcutDetails.images} />
+          <Detailsimg productimages={apiData?.subImageVariants[0]?.images.map((images) => images.url) || prodcutDetails.images} />
         </div>
       </aside>
       <aside className='col-span-2 order-2'>
-        <Prodecudetailstext productdetails={prodcutDetails} />
+        <Prodecudetailstext productdetails={prodcutDetails} productdetail={apiData} />
       </aside>
     </section>
     <Credibility/>
