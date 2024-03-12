@@ -182,7 +182,7 @@ const Page = () => {
             <aside className="w-full">
             <Category formData={formData} handleChange={handleChange} />
             </aside>
-            <aside className="flex flex-wrap esm:flex-nowrap w-full py-1 items-end gap-2">
+            <aside className="w-full py-1">
             <Activeoffers formData={formData} handleChange={handleChange} />
             </aside>
             <Createproductspecification formData={formData} setFormData={setFormData} />

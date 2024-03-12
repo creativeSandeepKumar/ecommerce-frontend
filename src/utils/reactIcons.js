@@ -25,5 +25,31 @@ import { TbCategory2 } from "react-icons/tb";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { GoPlusCircle } from "react-icons/go";
 
-
-export { FaBars as BarIcon, IoIosSearch as SearchIcon, FaRegUser as UserIcon, HiOutlineShoppingBag as BagIcon, ImCross as CrossIcon, FaPlus as PlusIcon, FaMinus as MinusIcon, MdArrowForwardIos as ForwardArrow, MdArrowCircleDown as CircleDownArrow,  IoArrowForwardCircleOutline as CircleRightArrow, MdCurrencyRupee as RupeeIocn, GiRoundStar as StarIcon, BsPatchCheckFill as CheckIconPatch, FaPencil as PencilIcon, PiShoppingCartSimple as ShoppingCartIcon, IoIosArrowUp as ArrowAup, IoIosArrowDown as ArrowDown, MdRadioButtonUnchecked as UncheckedIcon, GoCheckCircle as CheckIcon, FaRegEdit as EditIcon, HiOutlinePlusCircle as PlusCircleIcon, TbAdjustmentsHorizontal as FilterIcon, TbArrowsSort as SortIcon,  TbCategory2 as CategoryIcon, IoIosRemoveCircleOutline as RemoveIcon, GoPlusCircle as AddIcon  }
+export {
+  FaBars as BarIcon,
+  IoIosSearch as SearchIcon,
+  FaRegUser as UserIcon,
+  HiOutlineShoppingBag as BagIcon,
+  ImCross as CrossIcon,
+  FaPlus as PlusIcon,
+  FaMinus as MinusIcon,
+  MdArrowForwardIos as ForwardArrow,
+  MdArrowCircleDown as CircleDownArrow,
+  IoArrowForwardCircleOutline as CircleRightArrow,
+  MdCurrencyRupee as RupeeIocn,
+  GiRoundStar as StarIcon,
+  BsPatchCheckFill as CheckIconPatch,
+  FaPencil as PencilIcon,
+  PiShoppingCartSimple as ShoppingCartIcon,
+  IoIosArrowUp as ArrowAup,
+  IoIosArrowDown as ArrowDown,
+  MdRadioButtonUnchecked as UncheckedIcon,
+  GoCheckCircle as CheckIcon,
+  FaRegEdit as EditIcon,
+  HiOutlinePlusCircle as PlusCircleIcon,
+  TbAdjustmentsHorizontal as FilterIcon,
+  TbArrowsSort as SortIcon,
+  TbCategory2 as CategoryIcon,
+  IoIosRemoveCircleOutline as RemoveIcon,
+  GoPlusCircle as AddIcon,
+};

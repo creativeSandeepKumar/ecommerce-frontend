@@ -23,7 +23,7 @@ const Slides = ({productimages, currentIndex, className}) => {
           alt={`Slide ${index + 1}`}
           width="100%"
           height="100%"
-          className={`max-h-[28rem] max-w-sm mx-auto md:max-w-[80%] lg:max-w-[85%] md:mx-0 md:ml-auto  ${className}`}
+          className={`h-full max-h-[20rem] md:max-h-[28rem] max-w-sm mx-auto md:max-w-[80%] lg:max-w-[85%] md:mx-0 md:ml-auto  ${className}`}
         />
       </div>
     ))}

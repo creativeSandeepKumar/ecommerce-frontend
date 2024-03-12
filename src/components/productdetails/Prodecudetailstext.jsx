@@ -5,18 +5,14 @@ import ActiveOffers from "./ActiveOffers";
 import Rewardspayments from "./Rewardspayments";
 import { Button } from "@/components/ui/button";
 
-const Prodecudetailstext = ({ productdetail, productdetails }) => {
-  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+const Prodecudetailstext = ({ productdetail, productdetails, handleColorChange, selectedColorIndex }) => {
 
-  const colors = (color) => {
-    let originalColor = color.split(" ");
-    let getcolor = originalColor[originalColor.length - 1];
-    return `${getcolor}`;
-  };
 
-  const handleColorChange = (index) => {
-    setSelectedColorIndex(index);
-  };
+  // const colors = (color) => {
+  //   let originalColor = color.split(" ");
+  //   let getcolor = originalColor[originalColor.length - 1];
+  //   return `${getcolor}`;
+  // };
 
   let colornames = productdetail && productdetail?.subImageVariants.map((subvariants) => {
     return {
@@ -24,8 +20,6 @@ const Prodecudetailstext = ({ productdetail, productdetails }) => {
       colorcode: subvariants.colorCode
     }
   });
-
-  console.log(colornames);
 
   // console.log(productdetail?.subImageVariants.map((subvariants) => subvariants.name));
 

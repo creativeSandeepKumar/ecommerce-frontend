@@ -8,6 +8,8 @@ import {
 import Heading from "../Heading";
 import Container from "@/components/Container";
 import Productcard from "@/utils/Productcard";
+import Link from "next/link";
+import { CircleRightArrow } from "@/utils/reactIcons";
 
 const TodaysofferItems = [
   {
@@ -67,7 +69,13 @@ const TodaysofferItems = [
 const Todayoffer = () => {
   return (
     <div>
+      <section className="flex justify-between items-center">
         <Heading item1={"Today's"} item2={"Offer"} />
+        <Link href={"/products"} className="flex items-center gap-2 text-blue-700 font-semibold text-sm" >
+          View All
+          <CircleRightArrow className="text-lg" />
+        </Link>
+      </section>
     <Carousel className="w-full">
       <CarouselContent className="w-full">
         {TodaysofferItems.map((item, index) => (

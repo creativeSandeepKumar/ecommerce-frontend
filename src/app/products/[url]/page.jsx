@@ -6,7 +6,7 @@ import Reviews from '@/components/productdetails/Reviews';
 import { RequestTypeEnum } from '@/constants';
 import useApiRequest from '@/hooks/useApiRequest';
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL
 const prodcutDetails = {
   images: [
@@ -29,13 +29,16 @@ const prodcutDetails = {
 }
 
 const Page = ({params}) => {
-  const { apiData, apiResponse, handlSubmitRequest, loading } = useApiRequest("/products/65ecbeb3d71098b1a95c85a1", RequestTypeEnum.GET);
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+  const { apiData, apiResponse, handlSubmitRequest, loading } = useApiRequest("/products/65ef14a490441660a9676604", RequestTypeEnum.GET);
+
+  const handleColorChange = (index) => {
+    setSelectedColorIndex(index);
+  };
 
   useEffect(() => {
    handlSubmitRequest();
   }, []);
-
-  console.log(apiData?.subImageVariants[0]?.images.map((images) => images.url));
   
 
   return (
@@ -48,15 +51,15 @@ const Page = ({params}) => {
       </div>
       <aside className='col-span-2 order-1 row-span-4'>
         <div className="sticky top-24">
-          <Detailsimg productimages={apiData?.subImageVariants[0]?.images.map((images) => images.url) || prodcutDetails.images} />
+          <Detailsimg productimages={apiData?.subImageVariants[selectedColorIndex]?.images.map((images) => images.url) || prodcutDetails.images} />
         </div>
       </aside>
       <aside className='col-span-2 order-2'>
-        <Prodecudetailstext productdetails={prodcutDetails} productdetail={apiData} />
+        <Prodecudetailstext productdetails={prodcutDetails} productdetail={apiData} handleColorChange={handleColorChange} selectedColorIndex={selectedColorIndex} />
       </aside>
     </section>
     <Credibility/>
-    <Productspecification/>
+    <Productspecification specifications={apiData?.specifications} />
     <Reviews/>
     </div>
   </Container>

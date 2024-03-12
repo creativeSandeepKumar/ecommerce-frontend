@@ -7,12 +7,10 @@ const Createproductspecification = ({ formData, setFormData }) => {
   const [sections, setSections] = useState([
     {
       idheading: id,
-      nameheading: "",
-      descriptionheading: "",
+      heading: "",
       specificationitems: [
         {
           id: id,
-          name: "",
           description: "",
         },
       ],
@@ -28,9 +26,8 @@ const Createproductspecification = ({ formData, setFormData }) => {
       ...sections,
       {
         idheading: lastid + 1,
-        nameheading: "",
-        descriptionheading: "",
-        specificationitems: [{ id: id + 1, description: "", name: "" }],
+        heading: "",
+        specificationitems: [{ id: id + 1, description: "" }],
       },
     ]);
   };
@@ -54,7 +51,6 @@ const Createproductspecification = ({ formData, setFormData }) => {
             {
               id: specificationsid[specificationsid.length - 1] + 1,
               description: "",
-              name: "",
             },
           ],
         };
@@ -135,12 +131,12 @@ const Createproductspecification = ({ formData, setFormData }) => {
             <section className="flex items-center gap-1 border-b-[1.5px] border-orange-700 pb-2">
               <aside className="w-full">
                 <fieldset className="border-gray-500 border-[1px] rounded-md px-3">
-                  <legend className="px-[3px]">Name-Heading</legend>
+                  <legend className="px-[3px]">Heading</legend>
                   <input
                     type="text"
-                    name="nameheading"
+                    name="heading"
                     className="w-full focus:outline-none pb-1"
-                    value={section.nameheading}
+                    value={section.heading}
                     onChange={(event) =>
                       handleSectionHeadingChange(event, section.idheading)
                     }
@@ -148,44 +144,10 @@ const Createproductspecification = ({ formData, setFormData }) => {
                   />
                 </fieldset>
               </aside>
-              <aside className="w-full">
-                <fieldset className="border-gray-500 border-[1px] rounded-md px-3">
-                  <legend className="px-[3px]">Description</legend>
-                  <input
-                    type="text"
-                    name="descriptionheading"
-                    className="w-full focus:outline-none pb-1"
-                    value={section.descriptionheading}
-                    onChange={(event) =>
-                      handleSectionHeadingChange(event, section.idheading)
-                    }
-                    placeholder="Heading description"
-                  />
-                </fieldset>
-              </aside>
             </section>
             <h2 className="pt-2 text-purple-600">Specification Details</h2>
             {section.specificationitems.map((item) => (
               <section key={item.id} className="flex items-center gap-1">
-                <aside className="w-full">
-                  <fieldset className="border-gray-500 border-[1px] rounded-md px-3">
-                    <legend className="px-[3px]">Name</legend>
-                    <input
-                      type="text"
-                      name="name"
-                      className="w-full focus:outline-none pb-1"
-                      value={item.name}
-                      onChange={(event) =>
-                        handleSpecificationChange(
-                          event,
-                          section.idheading,
-                          item.id
-                        )
-                      }
-                      placeholder="Name"
-                    />
-                  </fieldset>
-                </aside>
                 <aside className="w-full">
                   <fieldset className="border-gray-500 border-[1px] rounded-md px-3">
                     <legend className="px-[3px]">Description</legend>

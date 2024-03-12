@@ -68,16 +68,20 @@ const ProductspecificationItems = [
     
 ]
 
-const Productspecification = () => {
+const Productspecification = ({specifications}) => {
+
+
   return (
     <div className='py-4 max-w-5xl'>
         <h2 className='text-2xl py-2 md:text-4xl'>Product <span className='font-bold'>Specification</span></h2>
         <section className='flex flex-wrap justify-between gap-3 md:gap-0'>
             {
-                ProductspecificationItems.map((item, index) => (
+               specifications && Array.isArray(specifications) && specifications.map((item, index) => (
                     <div key={index} className='max-w-md  w-full md:w-1/2 p-2' >
-                        <h5 className='text-sm md:text-lg font-[Raleway]'>{item.name}</h5>
-                        <p className='font-semibold md:text-base'>{item.text}</p>
+                        <h5 className='text-sm md:text-lg font-[Raleway]'>{item.heading}</h5>
+                        {item.specificationitems?.map((descriptions) => (
+                        <p key={descriptions?.description} className='font-semibold md:text-base'>{descriptions?.description} </p>
+                        ))}
                     </div>
                 ))
             }
