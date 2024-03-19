@@ -14,7 +14,7 @@ const Prodecudetailstext = ({ productdetail, productdetails, handleColorChange, 
   //   return `${getcolor}`;
   // };
 
-  let colornames = productdetail && productdetail?.subImageVariants.map((subvariants) => {
+  let colornames = productdetail && productdetail?.subImageVariantColors.map((subvariants) => {
     return {
       name: subvariants.name,
       colorcode: subvariants.colorCode

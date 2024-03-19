@@ -7,6 +7,12 @@ import Createproductspecification from "@/components/dashboard/Createproductspec
 import Productsubimages from "@/components/dashboard/Productsubimages";
 import Category from "@/components/category/Category";
 import Activeoffers from "@/components/activeoffers/Activeoffers";
+import Bestfor from "@/components/Features/Bestfor/Bestfor";
+import Dialshape from "@/components/Features/Dialshape/Dialshape";
+import Feature from "@/components/Features/Feature/Feature";
+import Playback from "@/components/Features/Playback/Playback";
+import Colors from "@/components/Features/Colors/Colors";
+import Noicecancellation from "@/components/Features/Noicecancellation/Noicecancellation";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL
 const Page = () => {
@@ -26,16 +32,40 @@ const Page = () => {
     activeOffers: "",
     subImageVariants: [],
     subvariants: [],
+    bestfor: "",
+    noicecancellation: "",
+    display: "",
+    playback: "",
+    features: [],
   });
 
   const [mainImagePreview, setMainImagePreview] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, type, checked } = e.target;
+    if(type === "checkbox") {
+      
+      setFormData((prevData) => {
+        const targetArr = prevData[name];
+          if(checked) {
+            return {
+              ...prevData,
+              [name]: [...targetArr, value],
+            }
+          } else {
+            return {
+              ...prevData,
+              [name]: targetArr.filter((item) => item !== value),
+            }
+          }
+      });
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+   
   };
 
   const handleMainImageChange = (e) => {
@@ -80,8 +110,7 @@ const Page = () => {
   // Upload sub-images individually for each subvariant
   const subImagePromises = formData.subvariants.map(async (subvariant) => {
     const subvariantData = {
-      name: subvariant.name,
-      colorCode: subvariant.colorCode,
+      color: subvariant.color,
       images: [], // Array to store image URLs
     };
 
@@ -157,7 +186,7 @@ const Page = () => {
       name: "stock",
     },
   ];
-
+  console.log(formData);
   return (
     <Container>
       <div className="">
@@ -179,12 +208,11 @@ const Page = () => {
                 />
               </aside>
             ))}
-            <aside className="w-full">
-            <Category formData={formData} handleChange={handleChange} />
+           {[Category, Bestfor, Activeoffers, Dialshape, Feature, Playback, Noicecancellation].map((Features, index) => (
+            <aside key={index} className="w-full py-1">
+            <Features formData={formData} handleChange={handleChange} />
             </aside>
-            <aside className="w-full py-1">
-            <Activeoffers formData={formData} handleChange={handleChange} />
-            </aside>
+           ))}
             <Createproductspecification formData={formData} setFormData={setFormData} />
             <button className="px-4 py-1 w-full bg-blue-800 hover:bg-blue-900 text-white rounded-md mt-3">
               Create Product

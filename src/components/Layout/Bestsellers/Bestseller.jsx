@@ -41,7 +41,7 @@ const BestSellerItems = [
 
 const Bestseller = () => {
   return (
-    <div>
+    <div className="w-full">
         <Heading item1={"Explore"} item2={"Bestsellers"} />
     <Carousel className="w-full">
       <CarouselContent className="w-full">

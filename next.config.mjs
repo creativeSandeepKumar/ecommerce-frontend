@@ -1,8 +1,9 @@
 
-import { createProxyMiddleware } from 'http-proxy-middleware';
+// import { createProxyMiddleware } from 'http-proxy-middleware';
 /** @type {import('next').NextConfig} */
 
-const nextConfig = {
+// const nextConfig = {
+  
   
   // api: {
   //   bodyParser: false,
@@ -13,6 +14,23 @@ const nextConfig = {
   //   }),
   // },
   
+// };
+
+// export default nextConfig;
+
+import { createServer } from 'http';
+
+export default {
+  server: async (config = {}) => {
+    // Set custom DNS resolution order (if necessary)
+    dns.setDefaultResultOrder("verbatim");
+
+    // Create a custom server for potential additional configuration (optional)
+    const customServer = createServer(config.req, config.res);
+
+    // Handle requests as needed (optional)
+
+    return customServer;
+  },
 };
 
-export default nextConfig;

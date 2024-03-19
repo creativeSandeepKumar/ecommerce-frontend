@@ -5,6 +5,7 @@ const CheckInput = ({
   name,
   label,
   options = [],
+  idoptions= [],
   value,
   className = "",
   validationErrorsName = false,
@@ -31,8 +32,8 @@ const CheckInput = ({
             <input
               type={type}
               name={name}
-              value={item}
-              checked={value.includes(item)} // Check if the value matches the item
+              value={idoptions ? idoptions[index] : item}
+              checked={value?.includes(item)} // Check if the value matches the item
               onChange={handleChange}
             />
             {item}

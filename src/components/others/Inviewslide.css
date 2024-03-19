@@ -1,0 +1,28 @@
+
+.inviewsection,
+.hiddenitem,
+.showitem {
+  box-sizing: border-box; /* Include this in all relevant classes */
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.inviewsection {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  }
+  
+  .hiddenitem {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+  }
+
+  .showitem {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+  }

@@ -1,5 +1,6 @@
 import React, { useEffect, useId, useState } from 'react'
 import Input from '../Elements/Input';
+import Colors from '../Features/Colors/Colors';
 
 const Productsubimages = ({formData, setFormData}) => {
     const variantsId = useId();
@@ -13,14 +14,13 @@ const Productsubimages = ({formData, setFormData}) => {
     const [subvariantsList, setSubvariantsList] = useState([
         {
            id: variantsId,
-          name: '',
-          colorCode: '',
+          color: '',
           images: [],
         },
       ]);
     
       const handleAddSubvariant = () => {
-        setSubvariantsList([...subvariantsList, { id: subvariantsList.length + 1, name: '', colorCode: '', images: [] }]);
+        setSubvariantsList([...subvariantsList, { id: subvariantsList.length + 1, color: '', images: [] }]);
         setPreviewSubImages([...previewSubImages, { id: previewSubImages.length + 1, images: [] }])
       };
     
@@ -59,7 +59,6 @@ const Productsubimages = ({formData, setFormData}) => {
         );
       };
 
-
       const displaySubvariantImages = (images) =>
       images.length > 0 ? (
           images.map((image, index) => {
@@ -95,27 +94,8 @@ const Productsubimages = ({formData, setFormData}) => {
         <section key={subvariant.id} className='border-gray-600 border-[1px] rounded-md p-2 my-2'>
             {subvariantsList.find((sv) => sv.id === subvariant.id) && (
                 <div className='space-y-2'>
-          <div className='flex gap-2'>
-            <fieldset className='border-gray-500 border-[1px] rounded-md px-3'>
-              <legend className='px-[3px]'>Color Name</legend>
-              <input
-                type="text"
-                name="name"
-                className='w-full focus:outline-none pb-1'
-                value={subvariant.name}
-                onChange={(event) => handleSubvariantChange(event, index)}
-              />
-            </fieldset>
-            <fieldset className='border-gray-500 border-[1px] rounded-md px-3'>
-              <legend className='px-[3px]'>Color code</legend>
-              <input
-                type="text"
-                name="colorCode"
-                className='w-full focus:outline-none pb-1'
-                value={subvariant.colorCode}
-                onChange={(event) => handleSubvariantChange(event, index)}
-              />
-            </fieldset>
+          <div className='w-full'>
+              <Colors formData={subvariant} handleChange={(event) => handleSubvariantChange(event, index)} />
           </div>
           <div className="flex flex-wrap gap-2 justify-center">
             {displaySubvariantImages(...previewSubImages.filter((subimages) => subimages.id === subvariant.id).map((subImages) => subImages.images))}

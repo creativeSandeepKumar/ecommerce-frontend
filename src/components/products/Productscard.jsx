@@ -3,31 +3,38 @@ import { CheckIconPatch, PencilIcon, RupeeIocn, StarIcon } from "../../utils/rea
 import { useRouter } from "next/navigation";
 
 const Productscard = ({productdetails}) => {
-
     const router = useRouter();
 
-    const handleRouter = () => {
-      router.push("/products/56565")
+    const handleGetColors = (subimages) => {
+      let colors = subimages?.map((subimage) => subimage?.color);
+      return colors;
+    }
+
+    // console.log(handleGetColors(productdetails?.subImageVariants));
+
+    const handleRouter = (id) => {
+      router.push(`/products/${id}`)
     }
 
   return (
     <div className="font-[Roboto] flex esm:gap-3 card-shadow rounded-md">
     <section className="w-full relative">
       <img
-        src={productdetails.image}
+        src={productdetails.mainImage?.url}
         alt={productdetails.name}
-        onClick={handleRouter}
-        className="rounded-t-xl h-full esm:max-h-64 w-full bg-slate-200"
+        onClick={() => handleRouter(productdetails?._id)}
+        className="rounded-t-xl h-full esm:max-h-64 md:min-h-60 w-full bg-slate-200"
       />
       <div className="absolute top-4 w-full">
         <p className="bg-gray-950 w-fit flex items-center gap-2 px-3 text-white shadow  text-center py-1 rounded-r-md text-[8px] esm:text-xs">
           <PencilIcon className="text-orange-500" />
-          {productdetails.toptext}
+          Engraving Available
         </p>
       </div>
       <div className="absolute -bottom-3 w-full">
         <p className="bg-yellow-500 border-[1.5px] shadow w-full px-6 mx-auto text-center py-1 rounded-md text-xs  esm:text-sm font-semibold">
-          {productdetails.feature}
+          {productdetails?.playback || productdetails?.dialshape || productdetails?.noicecancellation
+}
         </p>
       </div>
     </section>
@@ -54,10 +61,14 @@ const Productscard = ({productdetails}) => {
           <h4 className="text-base font-bold">{productdetails.name}</h4>
         </aside>
         <aside className="pr-5">
-          <div className="h-5 w-5 rounded-full bg-gray-600 relative">
-            <div
-              className={`absolute h-5 w-5 ${productdetails.colors[1]} rounded-full -right-4`}
-            ></div>
+          <div className={`h-5 w-5 rounded-full relative`}>
+            {productdetails?.color.map((colors, index) => (
+             <div key={colors?.colorCode}
+                className={`absolute h-5 w-5 rounded-full -right-4`}
+                style={{background: colors?.colorCode, right: -index*7}}
+              ></div>
+            ))}
+          
           </div>
         </aside>
       </section>
@@ -67,21 +78,21 @@ const Productscard = ({productdetails}) => {
           <div className="flex gap-1 items-center flex-wrap">
             <span className="flex items-center text-base font-extrabold">
               <RupeeIocn />
-              {productdetails.offerPrice}
+              {productdetails.sellPrice}
             </span>
             <span className="flex items-center text-sm font-semibold line-through text-gray-500">
               <RupeeIocn />
-              {productdetails.originalPrice}
+              {productdetails.maxPrice}
             </span>
             <span className="text-xs font-semibold text-cyan-500">
-              {productdetails.offPercentage}% off
+              {productdetails.discountPercentage}% off
             </span>
           </div>
         
         </aside>
         <aside>
             <aside className='flex gap-2 pb-3 flex-wrap'>
-                {productdetails.qualities?.map((quality, index) => (
+                {productdetails.features?.map((quality, index) => (
                     <p key={index} className='px-4 py-1 bg-gray-200 font-[Raleway] text-xs rounded-md'>{quality}</p>
                 ))}
             </aside>

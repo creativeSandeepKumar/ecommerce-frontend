@@ -2,6 +2,8 @@ import {useEffect, useState} from "react"
 import { ApiResponseToUser, handleDeleteRequest, handleGetRequest, handlePatchRequest, handlePostRequest } from "../utils/ApiRequests";
 import { AvailableRequestType, RequestTypeEnum } from "../constants";
 import { reactToast } from "../utils/helper";
+import axios from "axios";
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL
 
 const useApiRequest = (requesturl, requesttype="GET", requestdata) => {
     const [loading, setLoading] = useState(false);

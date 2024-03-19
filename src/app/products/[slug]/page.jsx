@@ -1,4 +1,5 @@
 "use client";
+import requestdata from '@/app/api/requestdata';
 import { Container, Detailsimg, Prodecudetailstext } from '@/components'
 import Credibility from '@/components/Layout/Credibility';
 import Productspecification from '@/components/productdetails/Productspecification';
@@ -6,6 +7,7 @@ import Reviews from '@/components/productdetails/Reviews';
 import { RequestTypeEnum } from '@/constants';
 import useApiRequest from '@/hooks/useApiRequest';
 import axios from 'axios';
+import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL
 const prodcutDetails = {
@@ -28,18 +30,21 @@ const prodcutDetails = {
 
 }
 
-const Page = ({params}) => {
+const Page = ({slug}) => {
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
-  const { apiData, apiResponse, handlSubmitRequest, loading } = useApiRequest("/products/65ef14a490441660a9676604", RequestTypeEnum.GET);
+  const params = useParams();
+  const { apiData, apiResponse, handlSubmitRequest, loading } = useApiRequest(`/products/${params?.slug}`, RequestTypeEnum.GET);
 
   const handleColorChange = (index) => {
     setSelectedColorIndex(index);
   };
 
+  // const handleProduct = async () => await AllProducts();
+  
   useEffect(() => {
    handlSubmitRequest();
+  // handleProduct();
   }, []);
-  
 
   return (
     <Container>
