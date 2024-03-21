@@ -10,6 +10,7 @@ export const handlePostRequest = async(setLoading, setApiResponse, requesturl, u
         });
         setApiResponse(response.data);
       } catch (error) {
+        setLoading(false);
         setApiResponse(error.response.data);
         console.error(error.response.data);
       }
@@ -24,6 +25,7 @@ export const handlePatchRequest = async(setLoading, setApiResponse, requesturl, 
         });
         setApiResponse(response.data);
       } catch (error) {
+        setLoading(false);
         setApiResponse(error.response.data);
         console.error(error.response.data);
       }
@@ -39,6 +41,7 @@ export const handleGetRequest = async(setLoading, setApiResponse, requesturl) =>
         });
         setApiResponse(response?.data);
     } catch (error) {
+      setLoading(false);
         setApiResponse(error?.response?.data);
         console.error(error?.response?.data);
       }
@@ -53,6 +56,7 @@ export const handleDeleteRequest = async(setLoading, setApiResponse, requesturl)
         });
         setApiResponse(response?.data);
     } catch (error) {
+      setLoading(false);
         setApiResponse(error?.response?.data);
         console.error(error?.response?.data);
       }

@@ -12,6 +12,11 @@ import Cartproduct from "./Cartproduct";
 import Couponcode from "./Couponcode";
 import Checkoutstep1 from "@/components/checkout/Checkoutstep1";
 import Checkout from "@/components/checkout/Checkout";
+import { useEffect, useState } from "react";
+import useApiRequest from "@/hooks/useApiRequest";
+import { RequestTypeEnum } from "@/constants";
+import { useDispatch, useSelector } from "react-redux";
+import Emptycard from "./Emptycard";
 
 const upiImages = [
   "https://cdn.shopify.com/s/files/1/0057/8938/4802/files/paytm_icon_fa75a315-11a2-4c8e-a241-18af809eb683.svg?v=1682575951",
@@ -20,6 +25,72 @@ const upiImages = [
 ];
 
 const Cartside = ({ openSideNav, handleCloseSideNav }) => {
+  const dispatch = useDispatch();
+  const [quantityRequest, setQuantityRequest] = useState({
+    url: "/cart",
+    type: RequestTypeEnum.GET,
+    data: "",
+});
+const {updatetotal} = useSelector((state) => state.others)
+
+const { apiData, handlSubmitRequest, apiResponse, loading } = useApiRequest(quantityRequest.url, quantityRequest.type, {quantity: quantityRequest.data});
+
+const handleIncreaseQuantity = (quantity, ids) => {
+  setQuantityRequest({
+      url: `/cart/item/${ids}`,
+      type: RequestTypeEnum.POST,
+      data: quantity + 1
+  });
+};
+
+const handleDecreaseQuantity = (quantity, ids) => {
+  setQuantityRequest({
+      url: `/cart/item/${ids}`,
+      type: RequestTypeEnum.POST,
+      data: quantity - 1
+  });
+}
+
+
+const handleRemoveProductfromcart = (quantity, ids) => {
+  setQuantityRequest({
+      url: `/cart/item/${ids}`,
+      type: RequestTypeEnum.DELETE,
+      data: quantity
+  });
+}
+
+useEffect(() => {
+  if(openSideNav) {
+      handlSubmitRequest();
+  }
+
+  if(updatetotal) {
+    dispatch({
+      type: "otherreducers/UPDATECART",
+      payload: false,
+    })
+  }
+
+}, [openSideNav, updatetotal]);
+
+useEffect(() => {
+  if(quantityRequest.data) {
+      handlSubmitRequest();
+  }
+}, [quantityRequest.data]);
+
+useEffect(() => {
+  if(apiResponse && quantityRequest.data) {
+      setQuantityRequest({
+          url: `/cart`,
+          type: RequestTypeEnum.GET,
+          data: ""
+      });
+  }
+
+}, [apiResponse]);
+
   return (
     <div
     className="bg-gray-700 w-full min-h-[100vh] font-[Poppins] bg-opacity-50"
@@ -34,11 +105,13 @@ const Cartside = ({ openSideNav, handleCloseSideNav }) => {
       style={{ scrollbarWidth: "thin" }}
       onClick={(e) => e.stopPropagation()}
     >
-        <div onClick={handleCloseSideNav} className="absolute right-5 top-5 text-red-600" >{<CrossIcon/>}</div>
+      {apiData && apiData?.items.length ? (
+      <div>
+        <span onClick={handleCloseSideNav} className="absolute right-5 top-5 text-red-600" >{<CrossIcon/>}</span>
         <h2 className="text-xl font-semibold ">Your Cart</h2>
      <Cartsignup/>
-     <Cartproduct/>
-     <Couponcode/>
+     <Cartproduct apiData={apiData} handleDecreaseQuantity={handleDecreaseQuantity} handleIncreaseQuantity={handleIncreaseQuantity} loading={loading} handleRemoveProduct={handleRemoveProductfromcart} />
+     <Couponcode updateresponse={apiResponse?.success} updateloader={loading} coupondata={apiData?.coupon} />
      {/* gst invoice */}
      <section className="flex items-center gap-3">
      <Checkbox />
@@ -57,7 +130,10 @@ const Cartside = ({ openSideNav, handleCloseSideNav }) => {
      <section className="flex gap-2 justify-between items-center bg-gray-200 rounded-md p-4">
       <aside className="flex items-center">
         <div>
-        <p className=" text-lg font-semibold">₹ 1,266</p>
+          {apiData?.coupon && (
+          <p className="text-xs line-through">₹ {apiData?.cartTotal}</p>
+          )}
+        <p className=" text-lg font-semibold">₹ {apiData?.discountedTotal}</p>
         <p className="text-xs font-light">Inclusive all taxes</p>
         </div>
         <CircleDownArrow className="text-3xl" />
@@ -71,6 +147,10 @@ const Cartside = ({ openSideNav, handleCloseSideNav }) => {
   </Dialog>
       </aside>
      </section>
+     </div>
+     ) : (
+      <Emptycard/>
+     ) }
     </aside>
   </div>
   )

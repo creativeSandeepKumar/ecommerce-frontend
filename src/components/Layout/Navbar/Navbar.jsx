@@ -11,10 +11,13 @@ import Sidebar from "./Sidebar";
 import DesktopNav from "./DesktopNav";
 import { useRouter, usePathname } from "next/navigation";
 import Cartside from "./Cart/Cartside";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const pathname = usePathname();
+  const { opencart } = useSelector((state) => state.others)
   let whilteBoatIcon =
     "https://cdn.shopify.com/s/files/1/0057/8938/4802/files/boAt_logo_small_71d998b6-159b-46d2-8b6f-a91055697fdc.png?v=1693460400";
   let BoatIcon =
@@ -38,9 +41,15 @@ const Navbar = () => {
    setOpenSidebar({
     isopencart: !openSidebar.isopencart
    })
+
+   if(opencart) {
+    dispatch({
+      type: "otherreducers/OPENCART",
+      payload: false,
+    })
+   }
+
   };
-
-
 
   const handleCloseSidebar = () => {
     if (openSidebar.isopensidebar || openSidebar.isopencart) {
@@ -51,12 +60,16 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    if(opencart) {
+      handleCart();
+    }
+
     if (pathname !== "/") {
       setCurrenturl(true);
     } else {
       setCurrenturl(false);
     }
-  }, [pathname]);
+  }, [pathname, opencart]);
 
   useEffect(() => {
     const handleScroll = () => {

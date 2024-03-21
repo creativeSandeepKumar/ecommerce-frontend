@@ -1,20 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CheckIconPatch, PencilIcon, RupeeIocn, StarIcon } from "../../utils/reactIcons";
 import { useRouter } from "next/navigation";
+import useApiRequest from '@/hooks/useApiRequest';
+import { RequestTypeEnum } from '@/constants';
+import { useDispatch } from 'react-redux';
 
 const Productscard = ({productdetails}) => {
     const router = useRouter();
+    const dispatch = useDispatch();
+    const [productId, setProductId] = useState("");
+    const { handlSubmitRequest, apiResponse } = useApiRequest(`/cart/item/${productId}`, RequestTypeEnum.POST);
 
-    const handleGetColors = (subimages) => {
-      let colors = subimages?.map((subimage) => subimage?.color);
-      return colors;
+    const handleAddToCart = (id) => {
+      setProductId(id);
     }
-
-    // console.log(handleGetColors(productdetails?.subImageVariants));
 
     const handleRouter = (id) => {
       router.push(`/products/${id}`)
     }
+
+    useEffect(() => {
+
+      if(productId) {
+        handlSubmitRequest();
+        setProductId("");
+      }
+
+      if(apiResponse?.success) {
+        dispatch({
+          type: "otherreducers/OPENCART",
+          payload: true,
+        })
+      }
+     
+    }, [apiResponse, productId]);
 
   return (
     <div className="font-[Roboto] flex esm:gap-3 card-shadow rounded-md">
@@ -96,7 +115,7 @@ const Productscard = ({productdetails}) => {
                     <p key={index} className='px-4 py-1 bg-gray-200 font-[Raleway] text-xs rounded-md'>{quality}</p>
                 ))}
             </aside>
-          <button className="bg-gray-900 w-full text-sm hover:bg-gray-700 text-white px-4 py-2 rounded-xl">
+          <button onClick={() => handleAddToCart(productdetails?._id)} className="bg-gray-900 w-full text-sm hover:bg-gray-700 text-white px-4 py-2 rounded-xl">
             Add To Cart
           </button>
         </aside>

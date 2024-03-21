@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const Categorycard = ({items}) => {
    
-    
   return (
     <div className='max-w-20 md:max-w-40 min-h-32 space-y-2'>
             <img

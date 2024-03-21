@@ -24,6 +24,7 @@ import { TbArrowsSort } from "react-icons/tb";
 import { TbCategory2 } from "react-icons/tb";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { GoPlusCircle } from "react-icons/go";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 export {
   FaBars as BarIcon,
@@ -52,4 +53,5 @@ export {
   TbCategory2 as CategoryIcon,
   IoIosRemoveCircleOutline as RemoveIcon,
   GoPlusCircle as AddIcon,
+  RiDeleteBinLine as DeleteIcon
 };
