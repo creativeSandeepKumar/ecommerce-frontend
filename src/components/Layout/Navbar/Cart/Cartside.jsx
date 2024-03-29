@@ -12,11 +12,12 @@ import Cartproduct from "./Cartproduct";
 import Couponcode from "./Couponcode";
 import Checkoutstep1 from "@/components/checkout/Checkoutstep1";
 import Checkout from "@/components/checkout/Checkout";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import useApiRequest from "@/hooks/useApiRequest";
 import { RequestTypeEnum } from "@/constants";
 import { useDispatch, useSelector } from "react-redux";
 import Emptycard from "./Emptycard";
+import { useSearchParams } from "next/navigation";
 
 const upiImages = [
   "https://cdn.shopify.com/s/files/1/0057/8938/4802/files/paytm_icon_fa75a315-11a2-4c8e-a241-18af809eb683.svg?v=1682575951",
@@ -24,14 +25,17 @@ const upiImages = [
   "https://cdn.shopify.com/s/files/1/0057/8938/4802/files/phone_pe_icon_f9872d32-f8cf-43ca-8fa2-78db125fcdad.svg?v=1682575951",
 ];
 
-const Cartside = ({ openSideNav, handleCloseSideNav }) => {
+const Cartside = ({ openSideNav, handleCloseSideNav}) => {
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+  const accessToken = searchParams.get("access_token");
   const [quantityRequest, setQuantityRequest] = useState({
     url: "/cart",
     type: RequestTypeEnum.GET,
     data: "",
 });
-const {updatetotal} = useSelector((state) => state.others)
+const {updatetotal} = useSelector((state) => state.others);
+const confirmButtonRef = useRef(null);
 
 const { apiData, handlSubmitRequest, apiResponse, loading } = useApiRequest(quantityRequest.url, quantityRequest.type, {quantity: quantityRequest.data});
 
@@ -89,7 +93,16 @@ useEffect(() => {
       });
   }
 
-}, [apiResponse]);
+  if (apiData && accessToken) {
+    if (confirmButtonRef.current) {
+      confirmButtonRef.current.click();
+    }
+  }
+
+  console.log(apiResponse, apiData);
+  
+}, [apiResponse, apiData, accessToken]);
+
 
   return (
     <div
@@ -140,8 +153,14 @@ useEffect(() => {
       </aside>
       <aside>
       <Dialog>
-    <DialogTrigger asChild>
-      <Button>Confirm Order</Button>
+    <DialogTrigger asChild >
+ <Button
+ // Handle token availability and open dialog
+ ref={confirmButtonRef}
+ // disabled={isClicked}
+>
+ Confirm Order
+</Button>
     </DialogTrigger>
             <Checkout/>
   </Dialog>

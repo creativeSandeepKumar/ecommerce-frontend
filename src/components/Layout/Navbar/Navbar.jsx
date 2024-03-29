@@ -9,12 +9,15 @@ import {
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import DesktopNav from "./DesktopNav";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Cartside from "./Cart/Cartside";
 import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const accessToken = searchParams.get("access_token");
+  const [hasAccessToken, setHasAccessToken] = useState(false);
   const dispatch = useDispatch();
   const pathname = usePathname();
   const { opencart } = useSelector((state) => state.others)
@@ -64,12 +67,16 @@ const Navbar = () => {
       handleCart();
     }
 
+    if(accessToken) {
+      setHasAccessToken(true);
+    }
+
     if (pathname !== "/") {
       setCurrenturl(true);
     } else {
       setCurrenturl(false);
     }
-  }, [pathname, opencart]);
+  }, [pathname, opencart, accessToken]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,6 +94,14 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if(hasAccessToken) {
+      handleCart();
+    }
+   
+  }, [hasAccessToken])
+  
 
   return (
     <section>
@@ -180,6 +195,7 @@ const Navbar = () => {
           <Cartside
             handleCloseSideNav={handleCart}
             openSideNav={openSidebar.isopencart}
+            accessToken={accessToken}
           />
         </div>
       </nav>
