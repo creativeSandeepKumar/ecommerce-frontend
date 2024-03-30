@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-function VerifyPhoneContent() {
+function VerifyPhoneContent({gotonextstep, setPhoneNumber}) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const accessToken = searchParams.get("access_token");
@@ -38,6 +38,8 @@ function VerifyPhoneContent() {
       }
 
       const phEmailJwt = responseData.ph_email_jwt;
+      const phoneNumber = responseData.country_code + responseData.phone_no;
+      const expiryTime = 24 * 60 * 60 * 1000; 
 
       setUserDetails({
         countryCode: responseData.country_code,
@@ -45,11 +47,17 @@ function VerifyPhoneContent() {
         phEmailJwt: phEmailJwt,
       });
 
+      const itemObject = {
+        data: phoneNumber,
+        expiry: Date.now() + expiryTime
+      };
+
       // Set cookie with 1-day expiration
       const cookieExpire = new Date(
         Date.now() + 1 * 24 * 60 * 60 * 1000
       ).toUTCString();
       document.cookie = `ph_email_jwt=${phEmailJwt}; expires=${cookieExpire}; path=/`;
+      localStorage.setItem("phoneNumber", JSON.stringify(itemObject))
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -72,6 +80,14 @@ function VerifyPhoneContent() {
       httpRequest();
     }
   }, [accessToken]);
+
+  useEffect(() => {
+    if(userDetails) {
+      setPhoneNumber(userDetails.countryCode + userDetails.phoneNo);
+    }
+    
+  }, [userDetails, setUserDetails])
+  
 
   return (
     <React.Fragment>
@@ -188,11 +204,9 @@ function VerifyPhoneContent() {
                 maxWidth: "320px",
                 width: "100%",
               }}
-              onClick={() => {
-                router.push("/");
-              }}
+              onClick={() => gotonextstep("step2")}
             >
-              Back
+              Continue
             </button>
           </div>
         </div>
@@ -201,10 +215,10 @@ function VerifyPhoneContent() {
   );
 }
 
-export default function PhoneVerification() {
+export default function PhoneVerification({gotonextstep, setPhoneNumber}) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <VerifyPhoneContent />
+      <VerifyPhoneContent gotonextstep={gotonextstep} setPhoneNumber={setPhoneNumber} />
     </Suspense>
   );
 }

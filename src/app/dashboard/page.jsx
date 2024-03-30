@@ -186,7 +186,7 @@ const Page = () => {
       name: "stock",
     },
   ];
-  console.log(formData);
+
   return (
     <Container>
       <div className="">

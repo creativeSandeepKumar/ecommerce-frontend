@@ -8,9 +8,8 @@ import PhoneVerification from "./Phoneverification";
 
 
 
-const Checkoutstep1 = ({gotonextstep, verifyphone, handleVerifyPhone}) => {
+const Checkoutstep1 = ({gotonextstep, verifyphone, handleVerifyPhone, setPhoneNumber}) => {
 
-  const [mobileNumber, setMobileNumber] = useState("");
   const [ischeck, setIscheck] = useState(true);
 
   return (
@@ -22,7 +21,7 @@ const Checkoutstep1 = ({gotonextstep, verifyphone, handleVerifyPhone}) => {
           {/* <Input onChange={(e) => setMobileNumber(e.target.value) } placeholder="Enter Mobile" className="pl-16 py-3 text-xl font-[Raleway] border-gray-700 font-light" /> */}
           {/* <p className="absolute top-1 pl-2 text-xl">+91 |</p> */}
             </div>
-            <PhoneVerification/>
+            <PhoneVerification gotonextstep={gotonextstep} setPhoneNumber={setPhoneNumber} />
             <div className="flex items-center gap-3">
               <div onClick={() => setIscheck(!ischeck)} className="text-xl" >{!ischeck ? <UncheckedIcon/> : <CheckIcon/>}</div>
               <p className="text-xs">Notify me for order, updates and offers</p>

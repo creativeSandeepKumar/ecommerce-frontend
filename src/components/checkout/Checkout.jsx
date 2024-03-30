@@ -1,3 +1,4 @@
+"use client";
 import React, { useCallback, useState } from "react";
 import {
   DialogContent,
@@ -19,6 +20,7 @@ const logo = "https://cdn.gokwik.co/merchant/155/logo1632914610996.jpeg"
   const [verifyphone, setVerifyphone] = useState(false);
   const [verifyAdress, setVerifyAdress] = useState(false);
   const [topclicked, setTopclicked] = useState("top1");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleVerifyPhone = useCallback(() => {
     setVerifyphone(!verifyphone);
@@ -58,6 +60,7 @@ const logo = "https://cdn.gokwik.co/merchant/155/logo1632914610996.jpeg"
         }));
         setVerifyphone(false);
     }
+
   };
 
   return (
@@ -82,9 +85,9 @@ const logo = "https://cdn.gokwik.co/merchant/155/logo1632914610996.jpeg"
       ))}
     </section>
   </DialogHeader>
-  <div className="max-w-xl mx-auto py-7 ">
+  <div className="max-w-xl mx-auto py-7">
   {checkoutsteps.step1 && (
-    <Checkoutstep1 gotonextstep={handleSteps} verifyphone={verifyphone} handleVerifyPhone={handleVerifyPhone}  />
+    <Checkoutstep1 gotonextstep={handleSteps} verifyphone={verifyphone} handleVerifyPhone={handleVerifyPhone} setPhoneNumber={setPhoneNumber}  />
   )}
   {checkoutsteps.step2 && (
     <Checkoutstep2 gotonextstep={handleSteps} verifyAddress={verifyAdress} handleVerifyAddress={handleVerifyAdress} />
@@ -93,7 +96,6 @@ const logo = "https://cdn.gokwik.co/merchant/155/logo1632914610996.jpeg"
     <Checkoutstep3 topnumber={topclicked} setTopnumber={setTopclicked} />
   )}
   </div>
-   
     </aside>
     <aside className="w-6/12">
         <Ordersummary/>
